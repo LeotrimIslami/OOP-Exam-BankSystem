@@ -36,5 +36,28 @@ class Program
                     break;
             }
         }
+
+        //Shtimi i metodes se krijimit te Llogarive
+        static void CreateAccount()
+        {
+            Console.Write("Enter account number: ");
+            string accountNumber = Console.ReadLine();
+            Console.Write("Enter owner name: ");
+            string ownerName = Console.ReadLine();
+            Console.Write("Enter initial deposit: ");
+            decimal initialBalance = decimal.Parse(Console.ReadLine());
+
+            Console.Write("Account type (1 = Savings, 2 = Checking): ");
+            string type = Console.ReadLine();
+
+            BankAccount account;
+            if (type == "1")
+                account = new SavingsAccount(accountNumber, ownerName, initialBalance);
+            else
+                account = new CheckingAccount(accountNumber, ownerName, initialBalance);
+
+            accounts.Add(account);
+            Console.WriteLine("Account created successfully!");
+        }
     }
 }
