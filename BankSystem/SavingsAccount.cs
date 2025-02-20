@@ -12,4 +12,16 @@
         Deposit(interest);
         Console.WriteLine($"Interest of {interest:C} added.");
     }
+
+    //Vendosja e limit per terheqje nen 50% te depozites
+public override bool Withdraw(decimal amount)
+    {
+        if (amount > Balance * 0.5m)
+        {
+            Console.WriteLine("Cannot withdraw more than 50% of balance.");
+            return false;
+        }
+        return base.Withdraw(amount);
+    }
 }
+
