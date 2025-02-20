@@ -1,0 +1,6 @@
+.vs/
+obj/
+*.cache
+*.editorconfig
+.nuget.
+project.assets.json
