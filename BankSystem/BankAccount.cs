@@ -19,49 +19,64 @@ public class BankAccount //Krijimi i klases baze BankAccount
         OwnerName = ownerName;
         Balance = initialBalance;
     }
-}
 
-public void Deposit(decimal amount)   //Depozimi i parave ne llogari
-{
-    if (amount > 0)
+    public void Deposit(decimal amount)   //Depozimi i parave ne llogari
     {
-        Balance += amount;
-        AddTransaction("Deposit", amount);
-        Console.WriteLine($"Deposited {amount:C}. New balance: {Balance:C}");
-    }
-    else
-    {
-        Console.WriteLine("Deposit amount must be positive.");
-    }
-}
-
-public virtual bool Withdraw(decimal amount)   //Terheqja e parave nga llogaria nese balanci eshte i mjaftueshem
-{
-    if (amount > 0 && amount <= Balance)
-    {
-        Balance -= amount;
-        AddTransaction("Withdraw", amount);
-        Console.WriteLine($"Withdrew {amount:C}. New balance: {Balance:C}");
-        return true;
-    }
-    else
-    {
-        Console.WriteLine("Insufficient funds or invalid amount.");
-        return false;
-    }
-}
-
-private void AddTransaction(string type, decimal amount)
-{
-    if (transactionHistory.Count == 10)
-    {
-        transactionHistory.RemoveAt(0); // Remove oldest transaction
+        if (amount > 0)
+        {
+            Balance += amount;
+            AddTransaction("Deposit", amount);
+            Console.WriteLine($"Deposited {amount:C}. New balance: {Balance:C}");
+        }
+        else
+        {
+            Console.WriteLine("Deposit amount must be positive.");
+        }
     }
 
-    var transaction = new Transaction(type, amount);
-    transactionHistory.Add(transaction);
+    public virtual bool Withdraw(decimal amount)   //Terheqja e parave nga llogaria nese balanci eshte i mjaftueshem
+    {
+        if (amount > 0 && amount <= Balance)
+        {
+            Balance -= amount;
+            AddTransaction("Withdraw", amount);
+            Console.WriteLine($"Withdrew {amount:C}. New balance: {Balance:C}");
+            return true;
+        }
+        else
+        {
+            Console.WriteLine("Insufficient funds or invalid amount.");
+            return false;
+        }
+    }
 
-    // Append to file
-    File.AppendAllText("transactions.txt", $"{AccountNumber} | {transaction}\n");
-}
+    private void AddTransaction(string type, decimal amount)
+    {
+        if (transactionHistory.Count == 10)
+        {
+            transactionHistory.RemoveAt(0); // Remove oldest transaction
+        }
+
+        var transaction = new Transaction(type, amount);
+        transactionHistory.Add(transaction);
+
+        // Append to file
+        File.AppendAllText("transactions.txt", $"{AccountNumber} | {transaction}\n");
+    }
+
+    public void DisplayDetails()
+    {
+        Console.WriteLine($"Account Number: {AccountNumber}");
+        Console.WriteLine($"Owner Name: {OwnerName}");
+        Console.WriteLine($"Balance: {Balance:C}");
+    }
+
+    public void ShowTransactionHistory()
+    {
+        Console.WriteLine($"Transaction History for {AccountNumber}:");
+        foreach (var transaction in transactionHistory)
+        {
+            Console.WriteLine(transaction);
+        }
+    }
 }

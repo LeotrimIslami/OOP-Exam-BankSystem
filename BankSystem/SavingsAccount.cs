@@ -12,3 +12,4 @@
         Deposit(interest);
         Console.WriteLine($"Interest of {interest:C} added.");
     }
+}
