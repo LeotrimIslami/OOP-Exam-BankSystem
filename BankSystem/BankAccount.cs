@@ -8,6 +8,9 @@ public class BankAccount //Krijimi i klases baze BankAccount
     public string OwnerName { get; set; }
     public decimal Balance { get; protected set; }
 
+    //Shtimi i listes per transaksione
+    private List<Transaction> transactionHistory = new List<Transaction>();
+
 
     //Krijimi i llogaris me detaje
     public BankAccount(string accountNumber, string ownerName, decimal initialBalance)
@@ -46,4 +49,19 @@ public virtual bool Withdraw(decimal amount)   //Terheqja e parave nga llogaria 
         Console.WriteLine("Insufficient funds or invalid amount.");
         return false;
     }
+}
+
+private void AddTransaction(string type, decimal amount)
+{
+    if (transactionHistory.Count == 10)
+    {
+        transactionHistory.RemoveAt(0); // Remove oldest transaction
+    }
+
+    var transaction = new Transaction(type, amount);
+    transactionHistory.Add(transaction);
+
+    // Append to file
+    File.AppendAllText("transactions.txt", $"{AccountNumber} | {transaction}\n");
+}
 }
