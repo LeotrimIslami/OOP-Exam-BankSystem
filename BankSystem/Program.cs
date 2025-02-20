@@ -82,5 +82,20 @@ class Program
                 account.Withdraw(amount);
             }
         }
+
+        static void ViewAccount()
+        {
+            BankAccount account = FindAccount();
+            if (account != null)
+            {
+                account.DisplayDetails();
+            }
+        }
+        static BankAccount FindAccount()
+        {
+            Console.Write("Enter account number: ");
+            string accountNumber = Console.ReadLine();
+            return accounts.Find(acc => acc.AccountNumber == accountNumber);
+        }
     }
 }
