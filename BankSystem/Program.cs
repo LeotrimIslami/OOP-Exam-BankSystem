@@ -9,7 +9,7 @@ class Program
     {
         while (true)
         {
-            Console.WriteLine("\n1. Create Account\n2. Deposit\n3. Withdraw\n4. View Account\n5. Exit");
+            Console.WriteLine("\n1. Create Account\n2. Deposit\n3. Withdraw\n4. View Account\n5. View Transactions\n6. Exit");
             Console.Write("Choose an option: ");
             string choice = Console.ReadLine();
 
@@ -28,6 +28,9 @@ class Program
                     ViewAccount();
                     break;
                 case "5":
+                    ViewTransactions();
+                    break;
+                case "6":
                     Console.WriteLine("Exiting program...");
                     Environment.Exit(0); // ✅ This closes the console
                     break;
@@ -80,6 +83,15 @@ class Program
                 Console.Write("Enter withdrawal amount: ");
                 decimal amount = decimal.Parse(Console.ReadLine());
                 account.Withdraw(amount);
+            }
+        }
+
+        static void ViewTransactions()
+        {
+            BankAccount account = FindAccount();
+            if (account != null)
+            {
+                account.ShowTransactionHistory();
             }
         }
 
