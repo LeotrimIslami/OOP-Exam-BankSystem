@@ -54,7 +54,7 @@ public class BankAccount //Krijimi i klases baze BankAccount
     {
         if (transactionHistory.Count == 10)
         {
-            transactionHistory.RemoveAt(0); // Remove oldest transaction
+            transactionHistory.RemoveAt(0); 
         }
 
         var transaction = new Transaction(type, amount);
