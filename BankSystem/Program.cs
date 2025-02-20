@@ -59,5 +59,28 @@ class Program
             accounts.Add(account);
             Console.WriteLine("Account created successfully!");
         }
+
+        static void MakeDeposit()
+        {
+            BankAccount account = FindAccount();
+            if (account != null)
+            {
+                Console.Write("Enter deposit amount: ");
+                decimal amount = decimal.Parse(Console.ReadLine());
+                account.Deposit(amount);
+            }
+        }
+
+
+        static void MakeWithdrawal()
+        {
+            BankAccount account = FindAccount();
+            if (account != null)
+            {
+                Console.Write("Enter withdrawal amount: ");
+                decimal amount = decimal.Parse(Console.ReadLine());
+                account.Withdraw(amount);
+            }
+        }
     }
 }
