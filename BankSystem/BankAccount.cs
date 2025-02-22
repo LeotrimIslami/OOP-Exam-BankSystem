@@ -2,10 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 
-public class BankAccount //Krijimi i klases baze BankAccount
+/// <summary>
+/// Klasë bazë që përfaqëson një llogari bankare.
+/// </summary>
+public class BankAccount
 {
+    /// <summary>
+    /// Numri unik i llogarisë.
+    /// </summary>
     public string AccountNumber { get; private set; }
+
+    /// <summary>
+    /// Emri i pronarit të llogarisë.
+    /// </summary>
     public string OwnerName { get; set; }
+
+    /// <summary>
+    /// Bilanci aktual i llogarisë.
+    /// </summary>
     public decimal Balance { get; protected set; }
 
     //Shtimi i listes per transaksione
@@ -20,6 +34,10 @@ public class BankAccount //Krijimi i klases baze BankAccount
         Balance = initialBalance;
     }
 
+    /// <summary>
+    /// Metodë për të depozituar një shumë të caktuar në llogari.
+    /// </summary>
+    /// <param name="amount">Shuma që do të depozitohet.</param>
     public void Deposit(decimal amount)   //Depozimi i parave ne llogari
     {
         if (amount > 0)
@@ -34,6 +52,10 @@ public class BankAccount //Krijimi i klases baze BankAccount
         }
     }
 
+    /// <summary>
+    /// Metodë virtuale për tërheqjen e fondeve nga llogaria.
+    /// </summary>
+    /// <param name="amount">Shuma që do të tërhiqet.</param>
     public virtual bool Withdraw(decimal amount)   //Terheqja e parave nga llogaria nese balanci eshte i mjaftueshem
     {
         if (amount > 0 && amount <= Balance)

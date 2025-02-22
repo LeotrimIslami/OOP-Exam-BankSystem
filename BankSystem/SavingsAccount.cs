@@ -1,4 +1,8 @@
-﻿public class SavingsAccount : BankAccount    //Krijimi i klases SavingsAccount duke perdorur klasen baze BankAccount
+﻿
+/// <summary>
+/// Klasë që përfaqëson një llogari kursimi, e cila trashëgon nga BankAccount.
+/// </summary>
+public class SavingsAccount : BankAccount    //Krijimi i klases SavingsAccount duke perdorur klasen baze BankAccount
 {
     private const decimal InterestRate = 0.03m; // 3% interest
 
@@ -6,6 +10,10 @@
     public SavingsAccount(string accountNumber, string ownerName, decimal initialBalance)
         : base(accountNumber, ownerName, initialBalance) { }
 
+    /// <summary>
+    /// Metodë që llogarit interesin vjetor për llogarinë e kursimit.
+    /// </summary>
+    /// <returns>Shuma e interesit të fituar.</returns>
     public void CalculateInterest()
     {
         decimal interest = Balance * InterestRate;
@@ -13,8 +21,11 @@
         Console.WriteLine($"Interest of {interest:C} added.");
     }
 
-    //Vendosja e limit per terheqje nen 50% te depozites
-public override bool Withdraw(decimal amount)
+    /// <summary>
+    /// Metodë e mbishkruar që kufizon tërheqjen e fondeve në maksimum 50% të bilancës.
+    /// </summary>
+    /// <param name="amount">Shuma që do të tërhiqet.</param>
+    public override bool Withdraw(decimal amount)
     {
         if (amount > Balance * 0.5m)
         {
